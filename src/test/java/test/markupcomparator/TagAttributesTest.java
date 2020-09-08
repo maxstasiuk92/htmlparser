@@ -20,21 +20,25 @@ public class TagAttributesTest implements ParsingSpecialTags {
 	static final String refHtml =
 			"<h2></h2>"
 			+"<h3 id=\"3\"></h3>"
-			+"<h4 id=\"4\" style=\"style4\"></h4>";
+			+"<h4 id=\"4\" style=\"style4\"></h4>"
+			+ "<ctag required>";
 	
 	@ParameterizedTest(name = "data-set {index}")
 	@ValueSource(strings = {
 				"<h2></h2>"
 				+"<h3 id=\"3\"></h3>"
-				+"<h4 id=\"4\" style=\"style4\"></h4>",
+				+"<h4 id=\"4\" style=\"style4\"></h4>"
+				+ "<ctag required>",
 			
 				"<h2 id=\"2\"></h2>" //extra attribute
 				+"<h3 id=\"3\"></h3>"
-				+"<h4 id=\"4\" style=\"style4\"></h4>",
+				+"<h4 id=\"4\" style=\"style4\"></h4>"
+				+ "<ctag required>",
 				
 				"<h2></h2>"
 				+"<h3 id=\"3\" style=\"style3\"></h3>" //extra attribute
 				+"<h4 id=\"4\" style=\"style4\"></h4>"
+				+ "<ctag required>"
 			})
 	public void attributeMatch(String html) {
 		MarkupTemplate template = new MarkupTemplate(refHtml, ReferenceScope.ALL, ReferenceHierarchy.EXACT);
@@ -53,7 +57,17 @@ public class TagAttributesTest implements ParsingSpecialTags {
 				
 				"<h2></h2>"
 				+"<h3 id=\"5\"></h3>" //wrong attribute value
+				+"<h4 id=\"4\" style=\"style4\"></h4>",
+				
+				"<h2></h2>"
+				+"<h3 id=\"3\"></h3>"
 				+"<h4 id=\"4\" style=\"style4\"></h4>"
+				+ "<ctag required=\"false\">", //attribute has value
+				
+				"<h2></h2>"
+				+"<h3 id></h3>" //attribute has NO value
+				+"<h4 id=\"4\" style=\"style4\"></h4>"
+				+ "<ctag required>"
 			})
 	public void attributeNotMatch(String html) {
 		MarkupTemplate template = new MarkupTemplate(refHtml, ReferenceScope.ALL, ReferenceHierarchy.EXACT);

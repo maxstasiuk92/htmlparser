@@ -96,12 +96,12 @@ public abstract class XmlTemplateBuilder implements TemplateBuilder, ParsingSpec
 	
 	protected abstract InputStream getInputStream(String templateName) throws IOException;
 	
-	//traverse tree and 1)removes non-valuable text nodes; 2)collects new parser templates
+	//traverse tree and 1)removes non-valuable text nodes; 2) removes comments; 3)collects new parser templates
 	protected void processTree(Node confNode, Map<String, Template> emptyParserMap, Queue<String> foundNewTemplates) {
 		Node currentNode = confNode.childNode(0);
 		while (currentNode != null) {
 			String currentNodeName = currentNode.nodeName();
-			if (currentNodeName.equals("#text")) {
+			if (currentNodeName.equals("#text") || currentNodeName.equals("#comment")) {
 				Node n = currentNode;
 				currentNode = nextNonChild(currentNode, confNode);
 				n.remove();

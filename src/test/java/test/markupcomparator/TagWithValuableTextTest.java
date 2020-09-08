@@ -39,7 +39,15 @@ public class TagWithValuableTextTest implements ParsingSpecialTags{
 				+ "<h2></h2>"
 				+ "line1\nline2"
 				+ "<h3></h3>"
-				+ "txt"
+				+ "txt",
+				
+				"<!--comm-->"
+				+ "<h1></h1>"
+				+ "text"
+				+ "<h2></h2>"
+				+ "line1\nline2"
+				+ "<h3></h3>"
+				+ "<!--comm-->"
 			})
 	public void valuableTextMatch(String html) {
 		MarkupTemplate template = new MarkupTemplate(refHtml, ReferenceScope.ALL, ReferenceHierarchy.EXACT);

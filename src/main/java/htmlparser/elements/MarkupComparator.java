@@ -200,7 +200,8 @@ public class MarkupComparator extends Element {
 		final boolean NOT_FOUND = !FOUND;
 		boolean result = NOT_FOUND;
 		while (checkNode != null) {
-			if (!checkNode.nodeName().equals("#text")) {
+			String nodeName = checkNode.nodeName();
+			if (!nodeName.equals("#text") && !nodeName.equals("#comment")) {
 				result = FOUND;
 				break;
 			}

@@ -66,7 +66,7 @@ public class TreeProcessingTest implements ParsingSpecialTags, XmlConfigSpecialT
 			+ "</" + configRootTag + ">";
 	
 	@ParameterizedTest(name = "Insert: {0}")
-	@ValueSource(strings = {"", "not-valuable"})
+	@ValueSource(strings = {"", "not-valuable", "<!--comment-->"})
 	public void removeNonValuableTextCheck(String insert) {
 		final String noBaseUri = "";
 		TestAdapter builder = new TestAdapter("");
